@@ -1,11 +1,11 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-// const generateMarkdown = require('./generateMarkdown'); TODO: Generate SVG
+const generateLogo = require('./lib/shapes.js'); //logo generator
 
 // Create an array of questions for user input
 const questions = [{
     type: 'input',
-    message: 'What text do you want for your logo? (no more than 3 characters)',
+    message: 'Choose 3 characters to put on your logo.',
     name: 'text',
 },
 {
@@ -21,25 +21,42 @@ const questions = [{
 },
 {
     type: 'input',
-    message: 'Name a color for your chosen shape.',
+    message: 'Name a color for your shape.',
     name: 'shapeColor',
 }
 ];
 
+function makeShape(logoData) {
+    const { text, textColor, shape, shapeColor } = logoData;
 
-// TODO: Create a function to initialize app
-function init() { 
+    //create svg parameters in .svg format
+    const svgText = `
+<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+
+    <${shape} cx="150" cy="100" r="80" fill="${shapeColor}" />
+
+    <text x="150" y="125" font-size="60" text-anchor="middle" fill="${textColor}">${text}</text>
+
+</svg>`;
+
+
+    // return svg code
+    return svgText;
+}
+
+//Create a function to initialize logo
+function init() {
     inquirer.prompt(questions)
-    .then((answers) => {
-        
-        // pass your answers object into the generateMarkdown function here
-        //const returnedMarkdown = generateMarkdown(answers);
+        .then((logoData) => {
 
-        // TODO: Create a function to write README file
-        fs.writeFile('logo.svg', returnedMarkdown, (err) =>
-            err ? console.log(err) : console.log('Generated logo.svg')
-        );
-    });
+            //spits out user answers from shapes function
+            const returnedSvg = makeShape(logoData);
+
+            // TODO: Create a function to write README file
+            fs.writeFile('logo.svg', returnedSvg, (err) =>
+                err ? console.log(err) : console.log('Generated logo.svg')
+            );
+        });
 }
 
 // Function call to initialize app
