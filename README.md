@@ -4,7 +4,7 @@ a Node.js command-line application that takes in user input to generate a logo a
 
 GIVEN a command-line application that accepts user input
 WHEN I am prompted for text
-THEN I can enter up to three characters
+THEN I can enter up to three characters S:(letters, numbers, spec)
 WHEN I am prompted for the text color
 THEN I can enter a color keyword (OR a hexadecimal number)
 WHEN I am prompted for a shape
