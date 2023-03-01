@@ -2,6 +2,8 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 //shape classes
 const {Circle, Square, Triangle} = require('./lib/shapes'); 
+//svg.js
+const Svg = require('./lib/Svg');
 
 // Create an array of questions for user input
 const questions = [{
@@ -46,11 +48,17 @@ function init() {
             }
             shape.setColor(response.shapeColor);
             console.log(shape);
+
+            //uses svg.js to create new logo
+            const logo = new Svg();
+            //renders user input text and text color
+            logo.setText(response.text, response.textColor);
+            logo.setShape(shape);
             //const svg = generateLogo(response);
             // // TODO: Create a function to write README file
-            // fs.writeFile('./examples/logo.svg', returnedSvg, (err) =>
-            //     err ? console.log(err) : console.log('Generated logo.svg')
-            // );
+            fs.writeFile('./examples/logo.svg', logo.render(), (err) =>
+                 err ? console.log(err) : console.log('Generated logo.svg')
+             );
         });
 }
 
