@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateLogo = require('./lib/shapes'); //logo generator
+//shape classes
+const {Circle, Square, Triangle} = require('./lib/shapes'); 
 
 // Create an array of questions for user input
 const questions = [{
@@ -30,15 +31,26 @@ const questions = [{
 //Create a function to initialize logo
 function init() {
     inquirer.prompt(questions)
-        .then((logoData) => {
-
+        .then((response) => {
+            console.log(response);
             //spits out user answers from shapes function
-            const returnedSvg = generateLogo(logoData);
-
-            // TODO: Create a function to write README file
-            fs.writeFile('./examples/logo.svg', returnedSvg, (err) =>
-                err ? console.log(err) : console.log('Generated logo.svg')
-            );
+            let shape;
+            if (response.shape === 'Circle'){
+                shape = new Circle();
+            }
+            else if (response.shape === 'Square'){
+                shape = new Square();
+            } 
+            else if (response.shape === 'Triangle'){
+                shape = new Triangle();
+            }
+            shape.setColor(response.shapeColor);
+            console.log(shape);
+            //const svg = generateLogo(response);
+            // // TODO: Create a function to write README file
+            // fs.writeFile('./examples/logo.svg', returnedSvg, (err) =>
+            //     err ? console.log(err) : console.log('Generated logo.svg')
+            // );
         });
 }
 
