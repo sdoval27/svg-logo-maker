@@ -10,6 +10,13 @@ const questions = [{
     type: 'input',
     message: 'Choose 3 characters to put on your logo.',
     name: 'text',
+    validate: async (input) => { 
+        if (input.length > 3){
+        return "Your logo text has too many characters. Please try again.";
+    } else {
+        return true;
+    }
+}
 },
 {
     type: 'input',
@@ -33,6 +40,7 @@ const questions = [{
 //Create a function to initialize logo
 function init() {
     inquirer.prompt(questions)
+
         .then((response) => {
             console.log(response);
             //spits out user answers from shapes function
@@ -53,9 +61,11 @@ function init() {
             const logo = new Svg();
             //renders user input text and text color
             logo.setText(response.text, response.textColor);
+
+            
             logo.setShape(shape);
-            //const svg = generateLogo(response);
-            // // TODO: Create a function to write README file
+
+            // write svg file
             fs.writeFile('./examples/logo.svg', logo.render(), (err) =>
                  err ? console.log(err) : console.log('Generated logo.svg')
              );
