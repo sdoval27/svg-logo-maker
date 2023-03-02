@@ -22,7 +22,7 @@
  Install node JS and clone this project's repository in the [questions](#questions) section to generate your own logo.
 
 ## Usage:
- By answering the terminal questions through nodeJS, users can create a logo by specifying the shape, shape color, text, and text color. For a walkthrough of this app's functionality, please reference this [walkthrough](https://drive.google.com/file/d/1t2jsW0NPp0wSfWziKfOzhvVjpDrmOKp_/view?usp=sharing).
+ By answering the terminal questions through nodeJS, users can create a logo by specifying the shape, shape color, text, and text color. For a walkthrough of this app's functionality, please reference this [walkthrough](https://drive.google.com/file/d/1qQ6Q7lU3x87n57EPsojCtTFWVqotn173/view?usp=sharing).
 
 
 ## Tests:
